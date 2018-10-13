@@ -31,6 +31,15 @@ public class MealPlanningApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+         //Load the H2 database driver
+        try {
+            System.out.println("Loading H2 database driver...");
+            Class.forName("org.h2.Driver");
+            System.out.println("Load successful!");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error: Class not found: " + e.getMessage());
+        }
+        
         launch(args);
     }
     
