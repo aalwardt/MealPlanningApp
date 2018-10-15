@@ -19,7 +19,7 @@ public class MealPlanningApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/EditDB.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -30,16 +30,7 @@ public class MealPlanningApp extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-         //Load the H2 database driver
-        try {
-            System.out.println("Loading H2 database driver...");
-            Class.forName("org.h2.Driver");
-            System.out.println("Load successful!");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Error: Class not found: " + e.getMessage());
-        }
-        
+    public static void main(String[] args) {       
         launch(args);
     }
     
