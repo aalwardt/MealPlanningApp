@@ -59,8 +59,7 @@ public class EditDBController implements Initializable {
             //Remove it from the database
             MealDatabase.RemoveMeal(meal);
             //Update the list
-            mealList = MealDatabase.GetAllMeals();
-            observableList.setAll(mealList);
+            updateList();
         }
     }
     
@@ -76,15 +75,12 @@ public class EditDBController implements Initializable {
         //Add it to the database
         MealDatabase.InsertMeal(meal);
         //Update the list
-        mealList = MealDatabase.GetAllMeals();
-        observableList.setAll(mealList);
+        updateList();
     }
     
-    private void setListView() {
+    private void updateList() {
         mealList = MealDatabase.GetAllMeals();
-        observableList.setAll(mealList);
-        
-        mealListView.setItems(filteredList);
+        observableList.setAll(mealList);   
     }
     
     /**
@@ -92,20 +88,21 @@ public class EditDBController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateList();
         //Populate meal list
-        setListView();
+        mealListView.setItems(filteredList);
         
         //Populate choice box
         categoryBox.setItems(FXCollections.observableArrayList(Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
         categoryBox.getSelectionModel().selectFirst();
         
         //Add listener for changes in search field
-        searchField.textProperty().addListener(obs -> {
-            String filter = searchField.getText();
+        searchField.textProperty().addListener(obs -> { 
+            String filter = searchField.getText().toLowerCase();
             if (filter == null || filter.length() == 0) {
                 filteredList.setPredicate(s -> true);
             } else {
-                filteredList.setPredicate(s -> s.getName().contains(filter));
+                filteredList.setPredicate(s -> s.getName().toLowerCase().contains(filter));
             }
         });
         
