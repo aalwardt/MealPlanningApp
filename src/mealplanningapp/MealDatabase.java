@@ -37,10 +37,12 @@ public class MealDatabase {
         connectToDb();
         try {
             Statement stmt = connector.createStatement();
-            String sql = String.format("insert into meals(name, category, calories) values('%s', '%s', %d);",
+            String sql = String.format("insert into meals(name, category, calories, protein, carbs) values('%s', '%s', %d, %d, %d);",
                     meal.getName(),
                     meal.getCategory().toString(),
-                    meal.getCalories());
+                    meal.getCalories(),
+                    meal.getProtein(),
+                    meal.getCarbs());
             
             stmt.executeUpdate(sql);
             System.out.println("New meal added to database");
@@ -79,7 +81,7 @@ public class MealDatabase {
         connectToDb();
         try {
             Statement stmt = connector.createStatement();
-            String sql = "Select id, name, category, calories from meals;";
+            String sql = "Select id, name, category, calories, protein, carbs from meals;";
             ResultSet rs = stmt.executeQuery(sql);
 
             //Get data from result set
@@ -88,8 +90,10 @@ public class MealDatabase {
                 String name = rs.getString("name");
                 String category = rs.getString("category");
                 int calories = rs.getInt("calories");
+                int protein = rs.getInt("protein");
+                int carbs = rs.getInt("carbs");
 
-                mealList.add(new Meal(id, name, calories, Meal.Category.valueOf(category)));
+                mealList.add(new Meal(id, name, Meal.Category.valueOf(category), calories, protein, carbs));
             }
             System.out.println("Meals read from database");
 

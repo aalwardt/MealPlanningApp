@@ -40,6 +40,8 @@ public class Meal {
     public int getId() { return id; }
     public String getName() { return name; }
     public int getCalories() { return calories; }
+    public int getProtein() { return protein; }
+    public int getCarbs() { return carbs; }
     public Category getCategory() { return category; }
     
     @Override
