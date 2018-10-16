@@ -36,10 +36,10 @@
         <TextField id="calorieField" fx:id="carbField" prefWidth="73.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="10.0" prefWidth="53.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="0.0" prefWidth="195.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="0.0" prefWidth="61.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="0.0" prefWidth="181.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="10.0" prefWidth="80.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="0.0" prefWidth="168.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="0.0" prefWidth="90.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="0.0" prefWidth="152.0" />
       </columnConstraints>
       <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
