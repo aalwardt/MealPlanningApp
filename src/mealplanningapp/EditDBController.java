@@ -41,15 +41,18 @@ public class EditDBController implements Initializable {
     @FXML
     private TextField calorieField;
     @FXML
+    private TextField proteinField;
+    @FXML
+    private TextField carbField;
+    @FXML
     private ChoiceBox<Meal.Category> categoryBox;
     @FXML
     private Button newEntryButton;
-    @FXML
-    private Button closeButton;
 
     private ArrayList<Meal> mealList;
     ObservableList observableList = FXCollections.observableArrayList();
     FilteredList<Meal> filteredList = new FilteredList<>(observableList, s -> true);
+
     
     @FXML
     private void onRemoveSelected(ActionEvent event) {
@@ -69,9 +72,11 @@ public class EditDBController implements Initializable {
         String name = nameField.getText();
         Meal.Category category = categoryBox.getSelectionModel().getSelectedItem();
         int calories = Integer.parseInt(calorieField.getText());
+        int protein = Integer.parseInt(proteinField.getText());
+        int carbs = Integer.parseInt(carbField.getText());
         
         //Create new meal object
-        Meal meal = new Meal(name, calories, category);
+        Meal meal = new Meal(name, category, calories, protein, carbs);
         //Add it to the database
         MealDatabase.InsertMeal(meal);
         //Update the list
@@ -106,10 +111,20 @@ public class EditDBController implements Initializable {
             }
         });
         
-        //Force the calorie field to be numeric only
+        //Force the calorie, protein, and carb fields to be numeric only
         calorieField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!newValue.matches("\\d*")) {
                 calorieField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        proteinField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                proteinField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        carbField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                carbField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
     }    
