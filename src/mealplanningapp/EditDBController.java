@@ -68,6 +68,17 @@ public class EditDBController implements Initializable {
     
     @FXML
     private void onAddNewEntry(ActionEvent event) {
+        //Create new meal object from inputs
+        Meal meal = getMealFromInput();
+        
+        //Add it to the database
+        MealDatabase.InsertMeal(meal);
+        //Update the list
+        updateList();
+    }
+    
+    //Creates a meal object based on the input fields on the window
+    private Meal getMealFromInput() {
         //Get input from fields
         String name = nameField.getText();
         Meal.Category category = categoryBox.getSelectionModel().getSelectedItem();
@@ -75,12 +86,8 @@ public class EditDBController implements Initializable {
         int protein = Integer.parseInt(proteinField.getText());
         int carbs = Integer.parseInt(carbField.getText());
         
-        //Create new meal object
-        Meal meal = new Meal(name, category, calories, protein, carbs);
-        //Add it to the database
-        MealDatabase.InsertMeal(meal);
-        //Update the list
-        updateList();
+        //Create and return new meal object
+        return new Meal(name, category, calories, protein, carbs);
     }
     
     private void updateList() {
