@@ -75,7 +75,7 @@ public class MealDatabase {
     }
     
     //Removes a meal from the database
-    public static void Update(Meal oldMeal, Meal newMeal) {
+    public static void UpdateMeal(Meal oldMeal, Meal newMeal) {
         connectToDb();
         try {
             Statement stmt = connector.createStatement();
