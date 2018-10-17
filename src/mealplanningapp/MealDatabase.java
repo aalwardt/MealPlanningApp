@@ -74,6 +74,30 @@ public class MealDatabase {
         }  
     }
     
+    //Removes a meal from the database
+    public static void Update(Meal oldMeal, Meal newMeal) {
+        connectToDb();
+        try {
+            Statement stmt = connector.createStatement();
+            String sql = String.format("update meals set name = '%s', category = '%s', calories = %d, protein = %d, carbs = %d where ID=%d;",
+                    newMeal.getName(),
+                    newMeal.getCategory().toString(),
+                    newMeal.getCalories(),
+                    newMeal.getProtein(),
+                    newMeal.getCarbs(),
+                    oldMeal.getId());
+            
+            stmt.executeUpdate(sql);
+            System.out.println("Meal updated in database");
+            
+            //Clean up environment
+            stmt.close();
+            connector.close();
+        } catch (SQLException e) {
+            System.err.println("SQL Update Failure: " + e.getMessage());
+        }  
+    }
+    
     //Gets all meals from the database
     public static ArrayList<Meal> GetAllMeals() {
         ArrayList<Meal> mealList = new ArrayList<>();
