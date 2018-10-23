@@ -8,7 +8,6 @@ package mealplanningapp;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,10 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -48,7 +46,9 @@ public class EditDBController implements Initializable {
     private ChoiceBox<Meal.Category> categoryBox;
     @FXML
     private Button newEntryButton;
-
+    @FXML
+    private DatePicker datePickr;
+    
     private ArrayList<Meal> mealList;
     ObservableList observableList = FXCollections.observableArrayList();
     FilteredList<Meal> filteredList = new FilteredList<>(observableList, s -> true);
