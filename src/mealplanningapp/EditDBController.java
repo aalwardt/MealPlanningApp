@@ -8,6 +8,7 @@ package mealplanningapp;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -115,6 +116,20 @@ public class EditDBController implements Initializable {
                 filteredList.setPredicate(s -> true);
             } else {
                 filteredList.setPredicate(s -> s.getName().toLowerCase().contains(filter));
+            }
+        });
+        
+        //Add listener for when a new meal is selected from list
+        mealListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal> observable, Meal oldMeal, Meal newMeal) {
+                //Update input fields to use data from selected meal
+                nameField.setText(newMeal.getName());
+                categoryBox.getSelectionModel().select(newMeal.getCategory());
+                calorieField.setText(String.valueOf(newMeal.getCalories()));
+                proteinField.setText(String.valueOf(newMeal.getProtein()));
+                carbField.setText(String.valueOf(newMeal.getCarbs()));
+                
             }
         });
         
