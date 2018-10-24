@@ -36,7 +36,7 @@ public class EditDBController implements Initializable {
     @FXML
     private Button removeEntryButton;
     @FXML
-    private Button UpdateEntry;
+    private Button updateEntryButton;
     @FXML
     private TextField nameField;
     @FXML
