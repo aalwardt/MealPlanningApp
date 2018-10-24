@@ -36,6 +36,8 @@ public class EditDBController implements Initializable {
     @FXML
     private Button removeEntryButton;
     @FXML
+    private Button UpdateEntry;
+    @FXML
     private TextField nameField;
     @FXML
     private TextField calorieField;
@@ -76,6 +78,21 @@ public class EditDBController implements Initializable {
         MealDatabase.InsertMeal(meal);
         //Update the list
         updateList();
+    }
+    
+    @FXML
+    private void onUpdateEntry(ActionEvent event) {
+        //Create new meal object from inputs
+        Meal newMeal = getMealFromInput();
+        
+        //Get the selected list view item
+        Meal oldMeal = mealListView.getSelectionModel().getSelectedItem();
+        if (oldMeal != null) {
+            //Remove it from the database
+            MealDatabase.UpdateMeal(oldMeal, newMeal);
+            //Update the list
+            updateList();
+        }
     }
     
     //Creates a meal object based on the input fields on the window
@@ -123,13 +140,14 @@ public class EditDBController implements Initializable {
         mealListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
             @Override
             public void changed(ObservableValue<? extends Meal> observable, Meal oldMeal, Meal newMeal) {
-                //Update input fields to use data from selected meal
-                nameField.setText(newMeal.getName());
-                categoryBox.getSelectionModel().select(newMeal.getCategory());
-                calorieField.setText(String.valueOf(newMeal.getCalories()));
-                proteinField.setText(String.valueOf(newMeal.getProtein()));
-                carbField.setText(String.valueOf(newMeal.getCarbs()));
-                
+                if (newMeal != null) {
+                    //Update input fields to use data from selected meal
+                    nameField.setText(newMeal.getName());
+                    categoryBox.getSelectionModel().select(newMeal.getCategory());
+                    calorieField.setText(String.valueOf(newMeal.getCalories()));
+                    proteinField.setText(String.valueOf(newMeal.getProtein()));
+                    carbField.setText(String.valueOf(newMeal.getCarbs()));
+                }
             }
         });
         
@@ -149,6 +167,5 @@ public class EditDBController implements Initializable {
                 carbField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-    }    
-    
+    }        
 }
