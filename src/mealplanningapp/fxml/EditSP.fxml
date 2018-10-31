@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -9,52 +11,91 @@
 
 <AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane layoutX="7.0" prefHeight="640.0" prefWidth="894.0">
+      <GridPane layoutY="4.0" prefHeight="640.0" prefWidth="922.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="105.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="462.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="135.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="189.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0" minWidth="10.0" prefWidth="349.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0" minWidth="10.0" prefWidth="132.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="252.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="222.0" minHeight="0.0" prefHeight="66.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="31.0" prefWidth="136.0" text="Max Calories" GridPane.halignment="RIGHT" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="241.0" GridPane.columnIndex="1" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <ChoiceBox prefHeight="45.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="+" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label text="Add New Meal" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="46.0" text=":" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-            <Label text="Randomize All" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="Total Calories:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="140.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ChoiceBox prefHeight="45.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <ChoiceBox prefHeight="45.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <ChoiceBox prefHeight="45.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <ChoiceBox prefHeight="45.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label prefHeight="31.0" prefWidth="110.0" text="Max Carbs:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label text=" Randomize All" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label text="Total Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ChoiceBox prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <ChoiceBox prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <ChoiceBox prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <ChoiceBox prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Label text=" Min Carbs:" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+            <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <CheckBox mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Carbs" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <CheckBox mnemonicParsing="false" text="Protein" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <CheckBox mnemonicParsing="false" text="Cal." GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+            <ChoiceBox prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Label prefHeight="47.0" prefWidth="149.0" text="FLANNER" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Label>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text=": :" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label prefHeight="31.0" prefWidth="110.0" text="Max Protein:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label prefHeight="31.0" prefWidth="110.0" text="Max Calories:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label text=" Min Protein:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label text=" Min Calories:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <Label prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
          </children>
       </GridPane>
    </children>
