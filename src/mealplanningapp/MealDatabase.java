@@ -131,8 +131,77 @@ public class MealDatabase {
         return mealList;
     }
     
-    //Get all meals from the database under a calorie limit
-    public static ArrayList<Meal> GetMealsUnderCalories(int maxCalories) {
+    //Get meal plan satisfying requirements
+    public static ArrayList<Meal> GenerateMealPlan( ArrayList<Meal.Category> categories, int minCal, int maxCal, int minProt, int maxProt, int minCarb, int maxCarb) {
+        String[] alias = {"A", "B", "C", "D", "E"};
+        int numMeals = categories.size();
+
+        String selectedCols = ""; //The columns used in select statement
+        String selectedTables = ""; //The tables used in the select statement;
+        String catConditions = ""; //Conditions for category of each meal
+        String totalCalories = "";
+        String totalProtein = "";
+        String totalCarbs = "";
+        
+        for (int i = 0; i < numMeals; i++) {
+            //Selected Columns
+            //Add a comma if this is not the first entry
+            if (i != 0)
+                selectedCols += ",";
+            //" A.ID, A.category, A.calories, A.protein, A.carbs"
+            selectedCols += String.format(" %1$s.ID, %1$s.category, %1$s.calories, %1$s.protein, %1$s.carbs", alias[i]);
+            
+            //Selected tables
+            //Add a comma if this is not the first entry
+            if (i != 0)
+                selectedTables += ",";
+            //" Meals A, Meals B, Meals C... "
+            selectedTables += String.format(" Meals %s", alias[i]);
+            
+            //Category conditions
+            //Add an 'and' if this isn't the first entry
+            if (i != 0)
+                catConditions += " and";
+            //" A.category = 'Breakfast'"
+            catConditions += String.format(" %s.category = '%s'", alias[i], categories.get(i).toString());
+            
+            //Totals
+            //Add a " + " if this isn't the first entry
+            if (i != 0) {
+                totalCalories += " + ";
+                totalProtein += " + ";
+                totalCarbs += " + ";
+            }
+            //"A.Calories + B.Calories + ..."
+            totalCalories += String.format("%s.calories", alias[i]);
+            totalProtein += String.format("%s.protein", alias[i]);
+            totalCarbs += String.format("%s.carbs", alias[i]);
+        }
+        
+        String sql = "select"
+                + selectedCols
+                + " from"
+                + selectedTables
+                + " where"
+                + catConditions;
+        
+        //Add the conditions for max and min calories, protein, and carbs
+        if (maxCal != -1) {
+           sql += String.format(" and (%s) > %d", totalCalories, minCal);
+           sql += String.format(" and (%s) < %d", totalCalories, maxCal);
+        }
+        if (maxProt != -1) {
+           sql += String.format(" and (%s) > %d", totalProtein, minProt);
+           sql += String.format(" and (%s) < %d", totalProtein, maxProt);
+        }
+        if (maxCarb != -1) {
+           sql += String.format(" and (%s) > %d", totalCarbs, minCarb);
+           sql += String.format(" and (%s) < %d", totalCarbs, maxCarb);
+        }
+        sql += ";";
+        
+        System.out.println(sql);
+        
         return null;
     }
 }
