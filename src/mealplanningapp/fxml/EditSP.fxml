@@ -92,11 +92,11 @@
             <Label fx:id="meal4Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <Label fx:id="meal5Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label fx:id="totalCarbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
-            <ComboBox fx:id="meal1Name" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox fx:id="meal2Name" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox fx:id="meal3Name" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="meal4Name" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox fx:id="meal5Name" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <ComboBox fx:id="meal1ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="meal2ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="meal3ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ComboBox fx:id="meal4ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ComboBox fx:id="meal5ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Button mnemonicParsing="false" onAction="#openEditDB" text="Edit Database" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
          </children>
       </GridPane>

@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,27 +61,27 @@ public class EditSPController implements Initializable {
 
     //Meal Category ChoiceBoxes
     @FXML
-    private ChoiceBox<?> meal1Cat;
+    private ChoiceBox<Meal.Category> meal1Cat;
     @FXML
-    private ChoiceBox<?> meal2Cat;
+    private ChoiceBox<Meal.Category> meal2Cat;
     @FXML
-    private ChoiceBox<?> meal3Cat;
+    private ChoiceBox<Meal.Category> meal3Cat;
     @FXML
-    private ChoiceBox<?> meal4Cat;
+    private ChoiceBox<Meal.Category> meal4Cat;
     @FXML
-    private ChoiceBox<?> meal5Cat;
+    private ChoiceBox<Meal.Category> meal5Cat;
     
-    //Meal Name ComboBoxes
+    //Meal ComboBoxes
     @FXML
-    private ComboBox<?> meal1Name;
+    private ComboBox<Meal> meal1ComboBox;
     @FXML
-    private ComboBox<?> meal2Name;
+    private ComboBox<Meal> meal2ComboBox;
     @FXML
-    private ComboBox<?> meal3Name;
+    private ComboBox<Meal> meal3ComboBox;
     @FXML
-    private ComboBox<?> meal4Name;
+    private ComboBox<Meal> meal4ComboBox;
     @FXML
-    private ComboBox<?> meal5Name;
+    private ComboBox<Meal> meal5ComboBox;
     
     //Meal Calorie Labels
     @FXML
@@ -144,12 +148,18 @@ public class EditSPController implements Initializable {
     
     //Lists containing each category of control
     private List<ChoiceBox> mealsCats;
-    private List<ComboBox> mealsNames;
+    private List<ComboBox> mealsComboBox;
     private List<Button> mealsRandom;
     private List<Label> mealsCals;
     private List<Label> mealsProts;
     private List<Label> mealsCarbs;
     
+    ObservableList observableList = FXCollections.observableArrayList();
+    FilteredList<Meal> meal1FilteredList = new FilteredList<>(observableList, s -> false);
+    FilteredList<Meal> meal2FilteredList = new FilteredList<>(observableList, s -> false);
+    FilteredList<Meal> meal3FilteredList = new FilteredList<>(observableList, s -> false);
+    FilteredList<Meal> meal4FilteredList = new FilteredList<>(observableList, s -> false);
+    FilteredList<Meal> meal5FilteredList = new FilteredList<>(observableList, s -> false);
     
     private void setMeal(Meal meal, int index) {
         meals[index] = meal;
@@ -174,10 +184,29 @@ public class EditSPController implements Initializable {
         mealsCals.get(index).setText(String.valueOf(cal));
         mealsProts.get(index).setText(String.valueOf(prot));
         mealsCarbs.get(index).setText(String.valueOf(carb));
+        
+        updateTotalValues();
     }
     
-    private void updateMaxValues() {
+    private void updateTotalValues() {
         
+        int sumCal = 0;
+        int sumProt = 0;
+        int sumCarb = 0;
+        
+        for (int i = 0; i < 5; i++) {
+            sumCal += Integer.parseInt(mealsCals.get(i).getText());
+            sumProt += Integer.parseInt(mealsProts.get(i).getText());
+            sumCarb += Integer.parseInt(mealsCarbs.get(i).getText());
+        }
+        
+        totalCal.setText(String.valueOf(sumCal));
+        totalProt.setText(String.valueOf(sumProt));
+        totalCarbs.setText(String.valueOf(sumCarb));
+    }
+    
+    private void getMeals() {
+        observableList.setAll(MealDatabase.GetAllMeals());   
     }
     
     /**
@@ -185,24 +214,105 @@ public class EditSPController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Load all meals from the database
+        getMeals();
+        
+        //Setup control list objects
         mealsCats = Arrays.asList(meal1Cat, meal2Cat, meal3Cat, meal4Cat, meal5Cat);
-        mealsNames = Arrays.asList(meal1Name, meal2Name, meal3Name, meal4Name, meal5Name);
+        mealsComboBox = Arrays.asList(meal1ComboBox, meal2ComboBox, meal3ComboBox, meal4ComboBox, meal5ComboBox);
         mealsRandom = Arrays.asList(meal1Random, meal2Random, meal3Random, meal4Random, meal5Random);
         mealsCals = Arrays.asList(meal1Cal, meal2Cal, meal3Cal, meal4Cal, meal5Cal);
         mealsProts = Arrays.asList(meal1Prot, meal2Prot, meal3Prot, meal4Prot, meal5Prot);
         mealsCarbs = Arrays.asList(meal1Carbs, meal2Carbs, meal3Carbs, meal4Carbs, meal5Carbs);
-        System.out.println(meal1Cat);
+        
+        //Set the filtered lists for each of the ComboBoxes
+        meal1ComboBox.setItems(meal1FilteredList);
+        meal2ComboBox.setItems(meal2FilteredList);
+        meal3ComboBox.setItems(meal3FilteredList);
+        meal4ComboBox.setItems(meal4FilteredList);
+        meal5ComboBox.setItems(meal5FilteredList);
         
         //Set up the meal choice blocks
-        for (ChoiceBox cbox : mealsCats) {
-            System.out.println(cbox);
-            cbox.setItems(FXCollections.observableArrayList(Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
-            
-            //TODO: Add listener so that when this is changed, mealsNames is unselected
+        for (int i = 0; i < mealsCats.size(); i++) {
+            mealsCats.get(i).setItems(FXCollections.observableArrayList(Meal.Category.None, Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
+            mealsCats.get(i).getSelectionModel().selectFirst();
         }
         
-    }    
-
+        //Listeners to category ChoiceBoxes to deselect to unselect meal ComboBox
+        meal1Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
+                //Deselect entry from associated ComboBox
+                meal1ComboBox.getSelectionModel().clearSelection();
+                meal1FilteredList.setPredicate(s -> (s.getCategory().equals(newValue)));
+            }
+        });
+        meal2Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
+                //Deselect entry from associated ComboBox
+                meal2ComboBox.getSelectionModel().clearSelection();
+                meal2FilteredList.setPredicate(s -> (s.getCategory().equals(newValue)));
+            }
+        });
+        meal3Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
+                //Deselect entry from associated ComboBox
+                meal3ComboBox.getSelectionModel().clearSelection();
+                meal3FilteredList.setPredicate(s -> (s.getCategory().equals(newValue)));
+            }
+        });
+        meal4Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
+                //Deselect entry from associated ComboBox
+                meal4ComboBox.getSelectionModel().clearSelection();
+                meal4FilteredList.setPredicate(s -> (s.getCategory().equals(newValue)));
+            }
+        });
+        meal5Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
+                //Deselect entry from associated ComboBox
+                meal5ComboBox.getSelectionModel().clearSelection();
+                meal5FilteredList.setPredicate(s -> (s.getCategory().equals(newValue)));
+            }
+        });
+        
+        //Listners to ComboBoxes to update fields upon selections
+        meal1ComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal> observable, Meal oldValue, Meal newValue) {
+                setMeal(newValue, 0);
+            }            
+        });
+        meal2ComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal> observable, Meal oldValue, Meal newValue) {
+                setMeal(newValue, 1);
+            }            
+        });
+        meal3ComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal> observable, Meal oldValue, Meal newValue) {
+                setMeal(newValue, 2);
+            }            
+        });
+        meal4ComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal> observable, Meal oldValue, Meal newValue) {
+                setMeal(newValue, 3);
+            }            
+        });
+        meal5ComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal>() {
+            @Override
+            public void changed(ObservableValue<? extends Meal> observable, Meal oldValue, Meal newValue) {
+                setMeal(newValue, 4);
+            }            
+        });
+    }   
+    
     @FXML
     private void openEditDB(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/EditDB.fxml"));
