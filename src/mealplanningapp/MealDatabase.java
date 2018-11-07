@@ -198,9 +198,9 @@ public class MealDatabase {
            sql += String.format(" and (%s) > %d", totalCarbs, minCarb);
            sql += String.format(" and (%s) < %d", totalCarbs, maxCarb);
         }
-        sql += ";";
+        sql += " order by rand() limit 1;";
         
-        System.out.println(sql);
+        
         
         return null;
     }

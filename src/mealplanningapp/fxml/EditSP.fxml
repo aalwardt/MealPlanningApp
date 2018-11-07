@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mealplanningapp.EditSPController">
    <children>
       <GridPane layoutY="4.0" prefHeight="640.0" prefWidth="922.0" stylesheets="@../../../build/classes/mealplanningapp/fxml/practice_theme.css">
         <columnConstraints>
@@ -39,14 +39,14 @@
             <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
             <Label text=" Randomize All" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <Label text="Total Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-            <Button fx:id="meal1Random" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Button fx:id="meal2Random" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Button fx:id="meal3Random" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-            <Button fx:id="meal4Random" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-            <ChoiceBox fx:id="meal1Cat" prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <ChoiceBox fx:id="meal2Cat" prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-            <ChoiceBox fx:id="meal3Cat" prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-            <ChoiceBox fx:id="meal4Cat" prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Button fx:id="meal1Random" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Button fx:id="meal2Random" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Button fx:id="meal3Random" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Button fx:id="meal4Random" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <ChoiceBox fx:id="meal1Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="meal2Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <ChoiceBox fx:id="meal3Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <ChoiceBox fx:id="meal4Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
             <Label text=" Min Carbs:" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
@@ -56,15 +56,15 @@
             <CheckBox fx:id="carbsToggle" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Carbs" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <CheckBox fx:id="protToggle" mnemonicParsing="false" text="Protein" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <CheckBox fx:id="calToggle" mnemonicParsing="false" prefHeight="17.0" prefWidth="80.0" text="Calories" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
-            <ChoiceBox fx:id="meal5Cat" prefHeight="45.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-            <Button fx:id="meal5Random" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <ChoiceBox fx:id="meal5Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Button fx:id="meal5Random" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <Label alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="926.0" text="FLANNER" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT">
                <font>
                   <Font name="System Bold Italic" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="randomAllButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text=": :" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Button fx:id="randomAllButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text=": :" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
             <TextField fx:id="minCarbs" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label prefHeight="31.0" prefWidth="82.0" text="Max Protein:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
             <Label prefHeight="31.0" prefWidth="83.0" text="Max Calories:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -92,11 +92,12 @@
             <Label fx:id="meal4Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <Label fx:id="meal5Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label fx:id="totalCarbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
-            <ComboBox fx:id="meal1Name" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox fx:id="meal2Name" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox fx:id="meal3Name" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="meal4Name" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox fx:id="meal5Name" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <ComboBox fx:id="meal1ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="meal2ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="meal3ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ComboBox fx:id="meal4ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ComboBox fx:id="meal5ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Button mnemonicParsing="false" onAction="#openEditDB" text="Edit Database" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

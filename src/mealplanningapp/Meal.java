@@ -8,7 +8,7 @@ public class Meal {
     
     //Different categories for each meal type
     public enum Category {
-        Breakfast, Lunch, Dinner, Snack
+        Breakfast, Lunch, Dinner, Snack, None
     }
     
     //ID number. Meals loaded from the database will have IDs.
