@@ -200,7 +200,7 @@ public class MealDatabase {
         }
         sql += " order by rand() limit 1;";
         
-        System.out.println(sql);
+        
         
         return null;
     }
