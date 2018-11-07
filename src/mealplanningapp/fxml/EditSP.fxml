@@ -59,7 +59,7 @@
             <ChoiceBox fx:id="meal5Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <Button fx:id="meal5Random" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-            <Label alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="926.0" text="FLANNER" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT">
+            <Label alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="926.0" text="FLANNR" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT">
                <font>
                   <Font name="System Bold Italic" size="32.0" />
                </font>
