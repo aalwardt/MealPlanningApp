@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.function.Predicate;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -244,7 +245,7 @@ public class EditSPController implements Initializable {
             
             //Retain previously selected meal when updating predicate
             mealsComboBox.get(i).getSelectionModel().select(oldMeal);
-        }
+        }   
     }
     
     /**
@@ -385,6 +386,67 @@ public class EditSPController implements Initializable {
             setMeal(meal, 4);
             updateMealListFilters();            
         });
+        
+        //Make maxCal field numeric only, update meal filters when it is changed
+        maxCal.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                maxCal.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        minCal.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                minCal.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        //Set Initial Values
+        maxCal.textProperty().set(String.valueOf(2000));
+        minCal.textProperty().set(String.valueOf(0));
+
+        maxProt.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                maxProt.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        minProt.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                minProt.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        //Set Initial Values
+        maxProt.textProperty().set(String.valueOf(0));
+        minProt.textProperty().set(String.valueOf(0));
+        
+        maxCarbs.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                maxCarbs.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        minCarbs.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                minCarbs.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        //Set Initial Values
+        maxCarbs.textProperty().set(String.valueOf(0));
+        minCarbs.textProperty().set(String.valueOf(0));
+        
+        
+        //Listeners for changes in Protein and Carbs checkboxes
+        protToggle.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            maxProt.disableProperty().set(!newValue);
+            minProt.disableProperty().set(!newValue);
+        });
+        //Disable these initially
+        maxProt.disableProperty().set(true);
+        minProt.disableProperty().set(true);
+            
+        carbsToggle.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            maxCarbs.disableProperty().set(!newValue);
+            minCarbs.disableProperty().set(!newValue);
+        });
+        //Disable these initially
+        maxCarbs.disableProperty().set(true);
+        minCarbs.disableProperty().set(true);
     }   
     
     @FXML
