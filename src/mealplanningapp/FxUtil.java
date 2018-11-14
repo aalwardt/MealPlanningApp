@@ -1,3 +1,5 @@
+//ComboBox autocomplete functionality provided by
+//https://stackoverflow.com/a/27384068
 package mealplanningapp;
 
 import javafx.collections.FXCollections;
