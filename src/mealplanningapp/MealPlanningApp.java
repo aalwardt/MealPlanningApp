@@ -26,7 +26,7 @@ public class MealPlanningApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/EditSP.fxml"));
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/mealplanningapp/css/practice_theme.css");
+        //scene.getStylesheets().add("/mealplanningapp/css/practice_theme.css");
         stage.setScene(scene);
         stage.show();
         

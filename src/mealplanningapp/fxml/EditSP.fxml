@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mealplanningapp.EditSPController">
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="898.0" stylesheets="@../css/practice_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mealplanningapp.EditSPController">
    <children>
       <GridPane layoutY="4.0" prefHeight="640.0" prefWidth="922.0">
         <columnConstraints>

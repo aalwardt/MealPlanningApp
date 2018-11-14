@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane prefHeight="513.0" prefWidth="520.0" stylesheets="@practice_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mealplanningapp.EditDBController">
+<GridPane prefHeight="513.0" prefWidth="520.0" stylesheets="@../css/practice_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mealplanningapp.EditDBController">
   <children>
     <ListView fx:id="mealListView" prefHeight="219.0" prefWidth="572.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <GridPane prefWidth="250.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
