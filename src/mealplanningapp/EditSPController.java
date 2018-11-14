@@ -293,6 +293,7 @@ public class EditSPController implements Initializable {
             public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
                 //Deselect entry from associated ComboBox
                 meal1ComboBox.getSelectionModel().clearSelection();
+                meal1ComboBox.setValue(null);
                 updateMealListFilters();
             }
         });
@@ -301,6 +302,7 @@ public class EditSPController implements Initializable {
             public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
                 //Deselect entry from associated ComboBox
                 meal2ComboBox.getSelectionModel().clearSelection();
+                meal2ComboBox.setValue(null);
                 updateMealListFilters();
             }
         });
@@ -309,6 +311,7 @@ public class EditSPController implements Initializable {
             public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
                 //Deselect entry from associated ComboBox
                 meal3ComboBox.getSelectionModel().clearSelection();
+                meal3ComboBox.setValue(null);
                 updateMealListFilters();
             }
         });
@@ -317,6 +320,7 @@ public class EditSPController implements Initializable {
             public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
                 //Deselect entry from associated ComboBox
                 meal4ComboBox.getSelectionModel().clearSelection();
+                meal4ComboBox.setValue(null);
                 updateMealListFilters();
             }
         });
@@ -325,6 +329,7 @@ public class EditSPController implements Initializable {
             public void changed(ObservableValue<? extends Meal.Category> observable, Meal.Category oldValue, Meal.Category newValue) {
                 //Deselect entry from associated ComboBox
                 meal5ComboBox.getSelectionModel().clearSelection();
+                meal5ComboBox.setValue(null);
                 updateMealListFilters();
             }
         });
