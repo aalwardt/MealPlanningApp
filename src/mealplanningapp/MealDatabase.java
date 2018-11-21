@@ -133,9 +133,16 @@ public class MealDatabase {
     
     //Get meal plan satisfying requirements
     public static ArrayList<Meal> GenerateMealPlan( ArrayList<Meal.Category> categories, int minCal, int maxCal, int minProt, int maxProt, int minCarb, int maxCarb) {
+        //Get the meal plan
+        ArrayList<Meal> mealPlan = new ArrayList<>();
         String[] alias = {"A", "B", "C", "D", "E"};
         int numMeals = categories.size();
+        
+        if (numMeals == 0) {
+            return mealPlan;
+        }
 
+        //Generate the SQL query (it's a big one)
         String selectedCols = ""; //The columns used in select statement
         String selectedTables = ""; //The tables used in the select statement;
         String catConditions = ""; //Conditions for category of each meal
@@ -148,8 +155,8 @@ public class MealDatabase {
             //Add a comma if this is not the first entry
             if (i != 0)
                 selectedCols += ",";
-            //" A.ID, A.category, A.calories, A.protein, A.carbs"
-            selectedCols += String.format(" %1$s.ID, %1$s.category, %1$s.calories, %1$s.protein, %1$s.carbs", alias[i]);
+            //" A.ID, A. A.category, A.calories, A.protein, A.carbs"
+            selectedCols += String.format(" %1$s.ID as %1$s_ID, %1$s.name as %1$s_name, %1$s.category as %1$s_category, %1$s.calories as %1$s_calories, %1$s.protein as %1$s_protein, %1$s.carbs as %1$s_carbs", alias[i]);
             
             //Selected tables
             //Add a comma if this is not the first entry
@@ -200,8 +207,39 @@ public class MealDatabase {
         }
         sql += " order by rand() limit 1;";
         
+        System.out.println(sql);
         
+
         
-        return null;
+        connectToDb();
+        try {
+            Statement stmt = connector.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            //Get data from result set
+            //There is a max of one row
+            while(rs.next()) {
+                //For each meal in our meal plan
+                for (int i = 0; i < numMeals; i++) {
+                    int id = rs.getInt(alias[i] + "_ID");
+                    String name = rs.getString(alias[i] + "_name");
+                    String category = rs.getString(alias[i] + "_category");
+                    int calories = rs.getInt(alias[i] + "_calories");
+                    int protein = rs.getInt(alias[i] + "_protein");
+                    int carbs = rs.getInt(alias[i] + "_carbs");
+                    
+                    mealPlan.add(new Meal(id, name, Meal.Category.valueOf(category), calories, protein, carbs));
+                }                
+                System.out.println("Random meal plan generated");
+            }
+
+            //Clean up environment
+            stmt.close();
+            connector.close();  
+        } catch (SQLException e) {
+            System.err.println("SQL Read Failure when generating plan: " + e.getMessage());
+        } 
+        
+        return mealPlan;
     }
 }

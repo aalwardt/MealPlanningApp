@@ -65,7 +65,7 @@
                   <Font name="System Bold Italic" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="randomAllButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text=": :" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Button fx:id="randomAllButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#generateRandomPlan" prefHeight="30.0" prefWidth="30.0" text=": :" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
             <TextField fx:id="minCarbs" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label text=" Min Protein:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Label text=" Min Calories:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
