@@ -248,6 +248,50 @@ public class EditSPController implements Initializable {
         }   
     }
     
+    
+    @FXML
+    private void generateRandomPlan(ActionEvent event) {
+        ArrayList<Meal.Category> categories = new ArrayList<>();
+        for (ChoiceBox<Meal.Category> catBox : mealsCats) {
+            Meal.Category currentCat = catBox.getSelectionModel().getSelectedItem();
+            //If it's not none, add it to the list
+            if (!currentCat.equals(Meal.Category.None))
+                categories.add(currentCat);
+        }
+        
+        ArrayList<Meal> mealPlan;
+        int maxCalories = Integer.parseInt(maxCal.getText());
+        int minCalories = Integer.parseInt(minCal.getText());
+        int maxProtein;
+        int minProtein;
+        if (protToggle.isSelected()) {
+            maxProtein = Integer.parseInt(maxProt.getText());
+            minProtein = Integer.parseInt(minProt.getText());
+        } else {
+            maxProtein = -1;
+            minProtein = -1;
+        }
+        int maxCarbo;
+        int minCarbo;
+        if (protToggle.isSelected()) {
+            maxCarbo = Integer.parseInt(maxCarbs.getText());
+            minCarbo = Integer.parseInt(minCarbs.getText());
+        } else {
+            maxCarbo = -1;
+            minCarbo = -1;
+        }
+        mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, minProtein, maxCarbo, minCarbo);
+        
+        int j = 0;
+        //Populate the boxes
+        for (Meal meal : mealPlan) {
+            if(!mealsCats.get(j).getSelectionModel().equals(Meal.Category.None)) {
+                mealsComboBox.get(j).getSelectionModel().select(meal);
+                j++;
+            }
+        }
+    }
+    
     /**
      * Initializes the controller class.
      */
@@ -466,5 +510,6 @@ public class EditSPController implements Initializable {
             }
         }));
     }
+
     
 }
