@@ -11,12 +11,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="898.0" stylesheets="@../css/practice_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mealplanningapp.EditSPController">
    <children>
-      <GridPane layoutY="4.0" prefHeight="640.0" prefWidth="922.0">
+      <GridPane layoutX="38.0" layoutY="14.0" prefHeight="640.0" prefWidth="922.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="189.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0" minWidth="10.0" prefWidth="349.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0" minWidth="10.0" prefWidth="115.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="269.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.0" minWidth="10.0" prefWidth="112.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="272.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
@@ -33,8 +33,12 @@
           <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="75.0" text="Max Calories:" />
+               </children>
+            </HBox>
             <DatePicker minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="172.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label prefHeight="31.0" prefWidth="81.0" text="Max Carbs:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <TextField fx:id="maxCarbs" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
             <Label text=" Randomize All" GridPane.columnIndex="1" GridPane.rowIndex="10" />
@@ -53,9 +57,6 @@
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <CheckBox fx:id="carbsToggle" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Carbs" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <CheckBox fx:id="protToggle" mnemonicParsing="false" text="Protein" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <CheckBox fx:id="calToggle" mnemonicParsing="false" prefHeight="17.0" prefWidth="80.0" text="Calories" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
             <ChoiceBox fx:id="meal5Cat" prefHeight="30.0" prefWidth="170.0" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <Button fx:id="meal5Random" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label text="Meal Info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
@@ -66,29 +67,27 @@
             </Label>
             <Button fx:id="randomAllButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#generateRandomPlan" prefHeight="30.0" prefWidth="30.0" text=": :" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
             <TextField fx:id="minCarbs" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Label prefHeight="31.0" prefWidth="82.0" text="Max Protein:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label prefHeight="31.0" prefWidth="83.0" text="Max Calories:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Label text=" Min Protein:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Label text=" Min Calories:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField fx:id="maxProt" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
             <TextField fx:id="maxCal" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
             <TextField fx:id="minCal" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <TextField fx:id="minProt" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Label fx:id="meal1Cal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Label fx:id="meal1Prot" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label fx:id="meal1Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Label fx:id="meal1Prot" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
             <Label fx:id="meal1Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label fx:id="meal2Cal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <Label fx:id="meal2Prot" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Label fx:id="meal2Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label fx:id="meal2Prot" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <Label fx:id="meal2Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label fx:id="meal3Cal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Label fx:id="meal3Prot" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Label fx:id="meal3Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Label fx:id="meal3Prot" alignment="CENTER" prefHeight="27.0" prefWidth="46.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
             <Label fx:id="meal3Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-            <Label fx:id="meal4Cal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-            <Label fx:id="meal5Cal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-            <Label fx:id="totalCal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-            <Label fx:id="meal4Prot" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <Label fx:id="meal5Prot" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-            <Label fx:id="totalProt" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+            <Label fx:id="meal4Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Label fx:id="meal5Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+            <Label fx:id="totalCal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+            <Label fx:id="meal4Prot" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Label fx:id="meal5Prot" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Label fx:id="totalProt" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
             <Label fx:id="meal4Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <Label fx:id="meal5Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label fx:id="totalCarbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
@@ -98,6 +97,21 @@
             <ComboBox fx:id="meal4ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <ComboBox fx:id="meal5ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Button mnemonicParsing="false" onAction="#openEditDB" text="Edit Database" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <children>
+                  <CheckBox fx:id="protToggle" mnemonicParsing="false" prefHeight="30.0" prefWidth="18.0" />
+                  <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="70.0" text="Max Protein:" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="249.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <CheckBox fx:id="carbsToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="31.0" />
+                  <Label prefHeight="31.0" prefWidth="61.0" text="Max Carbs:" />
+               </children>
+            </HBox>
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="52.0" text="Calories" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label text="Protein" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="58.0" text="Carbs" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </children>
