@@ -289,6 +289,12 @@ public class EditSPController implements Initializable {
                 j++;
             }
         }
+        
+        if (mealPlan.isEmpty()) {
+            for (ComboBox<Meal> cbox : mealsComboBox) {
+                cbox.getSelectionModel().clearSelection();
+            }
+        }
     }
     
     /**

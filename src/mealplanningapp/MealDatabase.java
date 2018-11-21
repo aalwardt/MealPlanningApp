@@ -207,10 +207,8 @@ public class MealDatabase {
         }
         sql += " order by rand() limit 1;";
         
-        System.out.println(sql);
-        
+        //System.out.println(sql);
 
-        
         connectToDb();
         try {
             Statement stmt = connector.createStatement();
@@ -223,12 +221,14 @@ public class MealDatabase {
                 for (int i = 0; i < numMeals; i++) {
                     int id = rs.getInt(alias[i] + "_ID");
                     String name = rs.getString(alias[i] + "_name");
-                    String category = rs.getString(alias[i] + "_category");
+                    Meal.Category category = Meal.Category.fromInteger(rs.getInt(alias[i] + "_category"));
                     int calories = rs.getInt(alias[i] + "_calories");
                     int protein = rs.getInt(alias[i] + "_protein");
                     int carbs = rs.getInt(alias[i] + "_carbs");
                     
-                    mealPlan.add(new Meal(id, name, Meal.Category.valueOf(category), calories, protein, carbs));
+                    System.out.println("Category:" + category);
+                    
+                    mealPlan.add(new Meal(id, name, category, calories, protein, carbs));
                 }                
                 System.out.println("Random meal plan generated");
             }

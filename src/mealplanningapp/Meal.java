@@ -8,9 +8,23 @@ public class Meal {
     
     //Different categories for each meal type
     public enum Category {
-        Breakfast, Lunch, Dinner, Snack, None
+        Breakfast, Lunch, Dinner, Snack, None;
+        
+        public static Category fromInteger(int x) {
+            switch(x) {
+                case 0:
+                    return Breakfast;
+                case 1:
+                    return Lunch;
+                case 2:
+                    return Dinner;
+                case 3:
+                    return Snack;
+                }
+            return None;
+        }
     }
-    
+        
     //ID number. Meals loaded from the database will have IDs.
     int id;
     
