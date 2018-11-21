@@ -155,7 +155,7 @@ public class MealDatabase {
             //Add a comma if this is not the first entry
             if (i != 0)
                 selectedCols += ",";
-            //" A.ID, A.category, A.calories, A.protein, A.carbs"
+            //" A.ID, A. A.category, A.calories, A.protein, A.carbs"
             selectedCols += String.format(" %1$s.ID as %1$s_ID, %1$s.name as %1$s_name, %1$s.category as %1$s_category, %1$s.calories as %1$s_calories, %1$s.protein as %1$s_protein, %1$s.carbs as %1$s_carbs", alias[i]);
             
             //Selected tables

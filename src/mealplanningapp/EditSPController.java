@@ -225,7 +225,6 @@ public class EditSPController implements Initializable {
                 remainingCalories -= Integer.parseInt(mealsCals.get(i).getText());
             }
         }
-        System.out.println("Remaining Calories: " + remainingCalories);
         return remainingCalories;
     }
     
