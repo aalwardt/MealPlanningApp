@@ -1,7 +1,7 @@
 .root{
     
-    /*-fx-background-color: */
-    -fx-background-image: url("black-gradient.jpg");
+    /*-fx-background-color: 
+    -fx-background-image: url("");*/
 }
 .button {
     
@@ -9,7 +9,12 @@
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
-    /* -fx-background-color:
+    -fx-text-weight:bold;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    
+    /*
+     -fx-background-color:
         linear-gradient(#f0ff35, #a9ff00),
         radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
     -fx-background-radius: 6, 5;
@@ -19,11 +24,17 @@
     */
 }
 .button:hover {
-    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+   -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+   -fx-text-weight:bold;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 .label{
     fx-text-weight:bold;
-    
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
     
 
@@ -54,7 +65,11 @@
     */
 }
 .choice-box .label{
-    -fx-text-fill: white;
+   -fx-text-fill: white;
+   -fx-text-weight:bold;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   
     
 }
 .date-picker{
