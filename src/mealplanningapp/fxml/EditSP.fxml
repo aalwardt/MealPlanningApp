@@ -84,10 +84,10 @@
             <Label fx:id="meal3Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
             <Label fx:id="meal4Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
             <Label fx:id="meal5Cal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-            <Label fx:id="totalCal" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+            <Label fx:id="totalCal" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
             <Label fx:id="meal4Prot" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
             <Label fx:id="meal5Prot" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-            <Label fx:id="totalProt" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+            <Label fx:id="totalProt" alignment="CENTER" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
             <Label fx:id="meal4Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <Label fx:id="meal5Carbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label fx:id="totalCarbs" prefHeight="27.0" prefWidth="50.0" text="0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
