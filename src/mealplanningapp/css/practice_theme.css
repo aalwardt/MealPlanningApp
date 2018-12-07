@@ -1,13 +1,13 @@
 .root{
     
     /*-fx-background-color: 
-    -fx-background-image: url("foodsandwich.jpg");
+    -fx-background-image: url("foodplate.jpg");
     -fx-background-size:     cover;                      
     -fx-background-repeat:   no-repeat;
     -fx-background-position: center center;   
-    -fx-background-color: rgba(255, 255, 255, 0.3);
+    
     */
-   
+   -fx-background-color: linear-gradient(to bottom, #696969 0%, #ffffff 100%);
 }
 
 
@@ -45,7 +45,7 @@
     
 }    
 .headertwo{
-     -fx-background-image: url("largefood.jpg");
+    -fx-background-image: url("picgrayscale.png");
     -fx-background-size:     cover;                      
     -fx-background-repeat:   no-repeat;
     -fx-background-position: center center;   
