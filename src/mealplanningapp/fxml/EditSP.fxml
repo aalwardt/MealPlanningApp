@@ -35,7 +35,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label prefHeight="30.0" prefWidth="75.0" text="Max Calories:" />
+                  <Label prefHeight="30.0" prefWidth="101.0" text="Max Calories:" />
                </children>
             </HBox>
             <DatePicker minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="172.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
@@ -97,16 +97,16 @@
             <ComboBox fx:id="meal4ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <ComboBox fx:id="meal5ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Button mnemonicParsing="false" onAction="#openEditDB" text="Edit Database" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="157.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <children>
                   <CheckBox fx:id="protToggle" mnemonicParsing="false" prefHeight="30.0" prefWidth="18.0" />
-                  <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="70.0" text="Max Protein:" />
+                  <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="90.0" text="Max Protein:" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="249.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <CheckBox fx:id="carbsToggle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="31.0" />
-                  <Label prefHeight="31.0" prefWidth="61.0" text="Max Carbs:" />
+                  <Label prefHeight="31.0" prefWidth="83.0" text="Max Carbs:" />
                </children>
             </HBox>
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="52.0" text="Calories" GridPane.columnIndex="3" GridPane.rowIndex="4" />
