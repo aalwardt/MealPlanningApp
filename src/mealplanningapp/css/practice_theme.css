@@ -7,7 +7,7 @@
     -fx-background-position: center center;   
     
     */
-   -fx-background-color: linear-gradient(to bottom, #696969 0%, #ffffff 100%);
+   -fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%);
 }
 
 
@@ -15,7 +15,7 @@
 .button {
     -fx-text-fill:white;
     -fx-font-size: 12px;
-    -fx-font-family: "Arial Black";
+    -fx-font-family:"Arial Black";
     -fx-text-weight:bold;
     -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
     -fx-padding: 2 12 2 12;
@@ -108,6 +108,11 @@
     
 }
 .listview{
-    
+    -fx-text-fill:white;
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial Black";
+    -fx-text-weight:bold;
+    -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+    -fx-padding: 2 12 2 12;
     
 }
