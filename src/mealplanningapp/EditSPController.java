@@ -7,6 +7,7 @@ package mealplanningapp;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -423,15 +424,88 @@ public class EditSPController implements Initializable {
         
     //Loads a meal into the specified meal index
     private void loadMeal(Meal meal, int index) {
-        //Set the category box
-        mealsCats.get(index).getSelectionModel().select(meal.getCategory());
-        //Set the meal combobox
-        mealsComboBox.get(index).getSelectionModel().select(meal);
+        if (meal != null) {
+            //Set the category box
+            mealsCats.get(index).getSelectionModel().select(meal.getCategory());
+            //Set the meal combobox
+            mealsComboBox.get(index).getSelectionModel().select(meal);
+        } else {
+            //If null, clear selections
+            mealsCats.get(index).getSelectionModel().select(Meal.Category.None);
+            mealsComboBox.get(index).getSelectionModel().clearSelection();
+        }
     }
     
     //Loads a meal plan into the application
     private void loadMealPlan(MealPlan mp) {
+        //Set the date
+        datePicker.setValue(mp.getDate());
         
+        //Set the max and min calories
+        maxCal.textProperty().set(String.valueOf(mp.getMaxCalories()));
+        minCal.textProperty().set(String.valueOf(mp.getMinCalories()));
+        
+        //Set the max and min protein, if applicable
+        if(mp.proteinToggled()) {
+            maxProt.textProperty().set(String.valueOf(mp.getMaxProtein()));
+            minProt.textProperty().set(String.valueOf(mp.getMinProtein()));
+            protToggle.selectedProperty().set(true);
+        } else {
+            protToggle.selectedProperty().set(false);
+        }
+        
+        //Set the max and min carbs, if applicable
+        if(mp.proteinToggled()) {
+            maxCarbs.textProperty().set(String.valueOf(mp.getMaxCarbs()));
+            minCarbs.textProperty().set(String.valueOf(mp.getMinCarbs()));
+            carbsToggle.selectedProperty().set(true);
+        } else {
+            carbsToggle.selectedProperty().set(false);
+        }
+        
+        //Load in the meals
+        for (int i = 0; i < 5; i++) {
+            Meal currentMeal = mp.getMeal(i);
+            loadMeal(currentMeal, i);
+        }
+    }
+    
+    private MealPlan createMealPlan() {
+        LocalDate date = datePicker.getValue();
+        int currMinCalories = Integer.parseInt(minCal.getText());
+        int currMaxCalories = Integer.parseInt(maxCal.getText());
+        
+        int currMinProtein, currMaxProtein;
+        if (protToggle.selectedProperty().get()) {
+            currMinProtein = Integer.parseInt(minProt.getText());
+            currMaxProtein = Integer.parseInt(maxProt.getText());
+        } else {
+            currMinProtein = -1;
+            currMaxProtein = -1;
+        }
+        
+        int currMinCarbs, currMaxCarbs;
+        if (carbsToggle.selectedProperty().get()) {
+            currMinCarbs = Integer.parseInt(minCarbs.getText());
+            currMaxCarbs = Integer.parseInt(maxCarbs.getText());
+        } else {
+            currMinCarbs = -1;
+            currMaxCarbs = -1;
+        }
+        
+        Meal meal1 = meal1ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal2 = meal2ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal3 = meal3ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal4 = meal4ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal5 = meal5ComboBox.getSelectionModel().getSelectedItem();
+        
+        MealPlan mealPlan = new MealPlan(date,
+                                            currMinCalories, currMaxCalories,
+                                            currMinProtein, currMaxProtein,
+                                            currMinCarbs, currMaxCarbs,
+                                            meal1, meal2, meal3, meal4, meal5);
+        
+        return mealPlan;
     }
     
     /**

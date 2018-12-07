@@ -5,7 +5,7 @@
  */
 package mealplanningapp;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 /**
@@ -13,11 +13,11 @@ import java.util.Date;
  * @author alexa
  */
 public class MealPlan {
-    private Date date;
+    private LocalDate date;
     private int minCalories, maxCalories, minProtein, maxProtein, minCarbs, maxCarbs;
     private Meal meal1, meal2, meal3, meal4, meal5;
     
-    public MealPlan(Date date,
+    public MealPlan(LocalDate date,
                     int minCalories, int maxCalories,
                     int minProtein, int maxProtein,
                     int minCarbs, int maxCarbs,
@@ -39,7 +39,7 @@ public class MealPlan {
     }
     
     //Getters for information
-    public Date getDate() { return date; }
+    public LocalDate getDate() { return date; }
     public int getMinCalories() { return minCalories; }
     public int getMaxCalories() { return maxCalories; }
     public int getMinProtein() { return minProtein; }
@@ -49,15 +49,15 @@ public class MealPlan {
     
     public Meal getMeal(int index) {
         switch (index) {
-            case 1:
+            case 0:
                 return meal1;
-            case 2:
+            case 1:
                 return meal2;
-            case 3:
+            case 2:
                 return meal3;
-            case 4:
+            case 3:
                 return meal4;
-            case 5:
+            case 4:
                 return meal5;
             default:
                 return null;
