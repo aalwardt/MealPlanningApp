@@ -1,60 +1,87 @@
 .root{
     
     /*-fx-background-color: 
-    -fx-background-image: url("");*/
-}
-.button {
-    
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
-    -fx-background-radius: 30;
-    -fx-background-insets: 0;
-    -fx-text-fill: white;
-    -fx-text-weight:bold;
-    -fx-font-family: "Arial Black";
-    -fx-fill: #818181;
-    
-    /*
-     -fx-background-color:
-        linear-gradient(#f0ff35, #a9ff00),
-        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
-    -fx-background-radius: 6, 5;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: #395306;
+    -fx-background-image: url("foodsandwich.jpg");
+    -fx-background-size:     cover;                      
+    -fx-background-repeat:   no-repeat;
+    -fx-background-position: center center;   
+    -fx-background-color: rgba(255, 255, 255, 0.3);
     */
+   
 }
+
+
+
+.button {
+    -fx-text-fill:white;
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial Black";
+    -fx-text-weight:bold;
+    -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+    -fx-padding: 2 12 2 12;
+    
+}
+
 .button:hover {
-   -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    
+   -fx-background-color: linear-gradient(#e0e0d1,#f5f5f0);
+   -fx-text-fill:black;
+   -fx-text-weight:bold;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #white;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+.label{
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
    -fx-fill: #818181;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
-.label{
-    fx-text-weight:bold;
-   -fx-font-family: "Arial Black";
-   -fx-fill: #818181;
-   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
-}
+.header{
+    -fx-fill: white;
+    -fx-text-fill: white;
+    -fx-font-size: 80px;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
     
+}    
+.headertwo{
+     -fx-background-image: url("largefood.jpg");
+    -fx-background-size:     cover;                      
+    -fx-background-repeat:   no-repeat;
+    -fx-background-position: center center;   
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    
+}
 
-
-.text-field{
-    
-}
-.listview{
-    
-    
-}
 .choice-box{
-    
-    
+    /*BLACK*/
+    -fx-text-fill:white;
+    -fx-font-size: 12px;
+    -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+    -fx-padding: 2 12 2 12;
+      
+    /*RED
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
-    
-    /*
+  */
+    /*NAVY BLUE
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+   */
+    /*LIME GREEN
     -fx-background-color:
         linear-gradient(#f0ff35, #a9ff00),
         radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
@@ -65,14 +92,22 @@
     */
 }
 .choice-box .label{
+    
+    -fx-text-fill: white;
+    /*
    -fx-text-fill: white;
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
    -fx-fill: #818181;
-   
+   */
     
 }
 .date-picker{
+}
+.text-field{
     
 }
-
+.listview{
+    
+    
+}
