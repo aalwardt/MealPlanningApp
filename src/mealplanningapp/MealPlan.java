@@ -63,4 +63,15 @@ public class MealPlan {
                 return null;
         }
     }
+    
+    //Get whether protein and carb limits were used in plan
+    //Min and Max protein/carbs are saved as -1 if not used
+    public boolean proteinToggled() {
+        if (minProtein == -1) return false;
+        else return true;
+    }
+    public boolean carbToggled() {
+        if (minCarbs == -1) return false;
+        else return true;
+    }
 }

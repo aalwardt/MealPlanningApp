@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -43,6 +44,12 @@ import javafx.stage.WindowEvent;
  * @author alexa
  */
 public class EditSPController implements Initializable {
+    
+    //Date picker and save plan button
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private Button saveMealPlan;
     
     //Minimum and Maximum Fields
     @FXML
@@ -167,7 +174,7 @@ public class EditSPController implements Initializable {
     FilteredList<Meal> meal3FilteredList = new FilteredList<>(observableList, s -> false);
     FilteredList<Meal> meal4FilteredList = new FilteredList<>(observableList, s -> false);
     FilteredList<Meal> meal5FilteredList = new FilteredList<>(observableList, s -> false);
-    
+
     private void setMeal(Meal meal, int index) {
         meals[index] = meal;
         
@@ -412,7 +419,18 @@ public class EditSPController implements Initializable {
                 }
             }
         }
+    }
         
+    //Loads a meal into the specified meal index
+    private void loadMeal(Meal meal, int index) {
+        //Set the category box
+        mealsCats.get(index).getSelectionModel().select(meal.getCategory());
+        //Set the meal combobox
+        mealsComboBox.get(index).getSelectionModel().select(meal);
+    }
+    
+    //Loads a meal plan into the application
+    private void loadMealPlan(MealPlan mp) {
         
     }
     

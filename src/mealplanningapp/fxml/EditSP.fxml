@@ -40,7 +40,7 @@
                   <Label prefHeight="30.0" prefWidth="94.0" text="Max Calories:" />
                </children>
             </HBox>
-            <DatePicker minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <DatePicker fx:id="datePicker" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="124.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <TextField fx:id="maxCarbs" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="87.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
             <Label text=" Randomize All" GridPane.columnIndex="1" GridPane.rowIndex="10" />
@@ -101,7 +101,7 @@
             <ComboBox fx:id="meal3ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <ComboBox fx:id="meal4ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <ComboBox fx:id="meal5ComboBox" prefHeight="30.0" prefWidth="310.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Button mnemonicParsing="false" onAction="#openEditDB" prefHeight="30.0" text="Edit Database" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#openEditDB" prefHeight="30.0" text="Edit Database" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="117.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <children>
                   <CheckBox fx:id="protToggle" mnemonicParsing="false" prefHeight="30.0" prefWidth="18.0" />
@@ -122,6 +122,7 @@
                   <Font name="System Bold Italic" size="32.0" />
                </font>
             </Label>
+            <Button fx:id="saveMealPlan" mnemonicParsing="false" text="Save Meal Plan" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>
