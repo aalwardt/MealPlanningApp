@@ -25,6 +25,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -32,6 +34,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
@@ -379,29 +382,38 @@ public class EditSPController implements Initializable {
         }
         int maxCarbo;
         int minCarbo;
-        if (protToggle.isSelected()) {
+        if (carbsToggle.isSelected()) {
             maxCarbo = Integer.parseInt(maxCarbs.getText());
             minCarbo = Integer.parseInt(minCarbs.getText());
         } else {
             maxCarbo = -1;
             minCarbo = -1;
         }
-        mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, minProtein, maxCarbo, minCarbo);
-        
-        //Select the items in each of the meal combo boxes
-        int j = 0;
-        for (int i = 0; i < 5; i++) {
-            if(!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
-                mealsComboBox.get(i).getSelectionModel().select(mealPlan.get(j));
-                j++;
-            }
-        }
+        mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, maxProtein, minCarbo, maxCarbo);
         
         if (mealPlan.isEmpty()) {
             for (ComboBox<Meal> cbox : mealsComboBox) {
                 cbox.getSelectionModel().clearSelection();
             }
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initStyle(StageStyle.UTILITY);
+            alert.setTitle("Meal Plan Generation Failure!");
+            alert.setHeaderText(null);
+            alert.setContentText("Could not create any meal plans with your options. Check your meal types and calorie, protein, and carb requirements.");
+
+            alert.showAndWait();
+        } else {
+            //Select the items in each of the meal combo boxes
+            int j = 0;
+            for (int i = 0; i < 5; i++) {
+                if(!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
+                    mealsComboBox.get(i).getSelectionModel().select(mealPlan.get(j));
+                    j++;
+                }
+            }
         }
+        
+        
     }
     
     /**
