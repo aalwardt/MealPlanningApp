@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.function.Predicate;
-import javafx.application.Platform;
+import java.util.Random;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -61,9 +60,7 @@ public class EditSPController implements Initializable {
     private CheckBox carbsToggle;
     @FXML
     private CheckBox protToggle;
-    @FXML
-    private CheckBox calToggle;
-
+    
     //Meal Category ChoiceBoxes
     @FXML
     private ChoiceBox<Meal.Category> meal1Cat;
@@ -440,11 +437,60 @@ public class EditSPController implements Initializable {
         FxUtil.autoCompleteComboBoxPlus(meal4ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal5ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         */
+        
         //Set up the meal choice blocks
         for (int i = 0; i < mealsCats.size(); i++) {
             mealsCats.get(i).setItems(FXCollections.observableArrayList(Meal.Category.None, Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
             mealsCats.get(i).getSelectionModel().selectFirst();
         }
+        
+        //Set actions for Random choice buttons
+        meal1Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal1ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal1ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal2Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal2ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal2ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal3Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal3ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal3ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal4Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal4ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal4ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal5Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal5ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal5ComboBox.getSelectionModel().select(index);
+                }
+            });
+        
         
         //Listeners to category ChoiceBoxes to deselect to unselect meal ComboBox
         meal1Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
