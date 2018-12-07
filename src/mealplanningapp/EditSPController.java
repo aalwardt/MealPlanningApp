@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.function.Predicate;
-import javafx.application.Platform;
+import java.util.Random;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -61,9 +60,7 @@ public class EditSPController implements Initializable {
     private CheckBox carbsToggle;
     @FXML
     private CheckBox protToggle;
-    @FXML
-    private CheckBox calToggle;
-
+    
     //Meal Category ChoiceBoxes
     @FXML
     private ChoiceBox<Meal.Category> meal1Cat;
@@ -148,7 +145,6 @@ public class EditSPController implements Initializable {
     @FXML
     private Button randomAllButton;
 
-    
     private Meal[] meals = new Meal[5];
     
     //Lists containing each category of control
@@ -228,23 +224,134 @@ public class EditSPController implements Initializable {
         return remainingCalories;
     }
     
+    private int getRemainingProtein(int index) {
+        //Returns how many protein are available for the meal given in the index
+        int remainingProtein = Integer.parseInt(maxProt.getText());
+        for (int i = 0; i < 5; i++) {
+            if (i != index) {
+                remainingProtein -= Integer.parseInt(mealsProts.get(i).getText());
+            }
+        }
+        return remainingProtein;
+    }
+    
+    private int getRemainingCarbs(int index) {
+        //Returns how many carbs are available for the meal given in the index
+        int remainingCarbs = Integer.parseInt(maxCarbs.getText());
+        for (int i = 0; i < 5; i++) {
+            if (i != index) {
+                remainingCarbs -= Integer.parseInt(mealsCarbs.get(i).getText());
+            }
+        }
+        return remainingCarbs;
+    }
+    
+    private int getRequiredCalories (int index) {
+        //Returns how many calories are required to satisfy the meal plan
+        int requiredCalories = Integer.parseInt(minCal.getText());
+        for (int i = 0; i < 5; i++) {
+            if (i != index) {
+                requiredCalories -= Integer.parseInt(mealsCals.get(i).getText());
+            }
+        }
+        return requiredCalories;
+    }
+    
+    private int getRequiredProtein (int index) {
+        //Returns how many protein are required to satisfy the meal plan
+        int requiredProtein = Integer.parseInt(minProt.getText());
+        for (int i = 0; i < 5; i++) {
+            if (i != index) {
+                requiredProtein -= Integer.parseInt(mealsProts.get(i).getText());
+            }
+        }
+        return requiredProtein;
+    }
+    
+    private int getRequiredCarbs (int index) {
+        //Returns how many calories are required to satisfy the meal plan
+        int requiredCarbs = Integer.parseInt(minCarbs.getText());
+        for (int i = 0; i < 5; i++) {
+            if (i != index) {
+                requiredCarbs -= Integer.parseInt(mealsCarbs.get(i).getText());
+            }
+        }
+        return requiredCarbs;
+    }
+    
     private void updateMealListFilters() {
         for (int i = 0; i < 5; i++) {
+            //Check if all other meals are assigned
+            boolean lastMeal = allOtherMealsSelected(i);
+            //Get if protein and carb filtering is enabled
+            boolean protFilter = protToggle.isSelected();
+            boolean carbFilter = carbsToggle.isSelected();
+
             //Set up filter by meal type
             Meal.Category mealCategory = (Meal.Category) mealsCats.get(i).getSelectionModel().getSelectedItem();
-            Predicate<Meal> isMealType = m -> (m.getCategory().equals(mealCategory));
+            Predicate<Meal> compoundPredicate = m -> (m.getCategory().equals(mealCategory));
+            
+            //Predicates for meal stats
             final int remainingCalories = getRemainingCalories(i);
-            Predicate<Meal> underRemainingCalories = m -> (m.getCalories() < remainingCalories);
+            Predicate<Meal> underRemainingCalories = m -> (m.getCalories() < remainingCalories);   
+            compoundPredicate = compoundPredicate.and(underRemainingCalories);
+            //If all other meals assigned, also require minimum calories
+            if (lastMeal) {
+                final int requiredCalories = getRequiredCalories(i);
+                Predicate<Meal> overRequiredCalories = m -> (m.getCalories() > requiredCalories);
+                compoundPredicate = compoundPredicate.and(overRequiredCalories);
+            }
+            
+            if (protFilter) {
+                final int remainingProtein = getRemainingProtein(i);
+                Predicate<Meal> underRemainingProtein = m -> (m.getProtein() < remainingProtein);
+                compoundPredicate = compoundPredicate.and(underRemainingProtein);
+                if (lastMeal) {
+                    final int requiredProtein = getRequiredProtein(i);
+                    Predicate<Meal> overRequiredProtein = m -> (m.getProtein() > requiredProtein);
+                    compoundPredicate = compoundPredicate.and(overRequiredProtein);
+                }
+            }
+            
+            if (carbFilter) {
+                final int remainingCarbs = getRemainingCarbs(i);
+                Predicate<Meal> underRemainingCarbs = m -> (m.getCarbs() < remainingCarbs);
+                compoundPredicate = compoundPredicate.and(underRemainingCarbs);
+                if (lastMeal) {
+                    final int requiredCarbs = getRequiredCarbs(i);
+                    Predicate<Meal> overRequiredCarbs = m -> (m.getCarbs() > requiredCarbs);
+                    compoundPredicate = compoundPredicate.and(overRequiredCarbs);
+                }
+            }
             
             //Save the meal that was previously selected
             Meal oldMeal = meals[i];
             
             //Update the predicate
-            mealFilters.get(i).setPredicate(isMealType.and(underRemainingCalories));
+            mealFilters.get(i).setPredicate(compoundPredicate);
             
             //Retain previously selected meal when updating predicate
             mealsComboBox.get(i).getSelectionModel().select(oldMeal);
         }   
+    }
+    
+    //Returns true if this is the last meal being selected
+    private boolean allOtherMealsSelected(int current) {
+        //Check all meals
+        for (int i = 0; i < 5; i++) {
+            //Skip if checking current meal slot
+            if (i != current) {
+                //Skip if category is "None"
+                if (!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
+                    //If category is not None, and it's empty, return false
+                    if (mealsComboBox.get(i).getSelectionModel().isEmpty()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        //If previously not returned false, return true
+        return true;
     }
     
     
@@ -281,6 +388,7 @@ public class EditSPController implements Initializable {
         }
         mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, minProtein, maxCarbo, minCarbo);
         
+        //Select the items in each of the meal combo boxes
         int j = 0;
         for (int i = 0; i < 5; i++) {
             if(!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
@@ -322,18 +430,67 @@ public class EditSPController implements Initializable {
         meal5ComboBox.setItems(meal5FilteredList);
         
         //Set the ComboBoxes to be auto complete
-        
+        /*
         FxUtil.autoCompleteComboBoxPlus(meal1ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal2ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal3ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal4ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal5ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
+        */
         
         //Set up the meal choice blocks
         for (int i = 0; i < mealsCats.size(); i++) {
             mealsCats.get(i).setItems(FXCollections.observableArrayList(Meal.Category.None, Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
             mealsCats.get(i).getSelectionModel().selectFirst();
         }
+        
+        //Set actions for Random choice buttons
+        meal1Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal1ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal1ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal2Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal2ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal2ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal3Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal3ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal3ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal4Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal4ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal4ComboBox.getSelectionModel().select(index);
+                }
+            });
+        meal5Random.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    Random randomGenerator = new Random();
+                    //Pick a random index in the list
+                    int index = randomGenerator.nextInt(meal5ComboBox.getItems().size());
+                    //Select the item at that index
+                    meal5ComboBox.getSelectionModel().select(index);
+                }
+            });
+        
         
         //Listeners to category ChoiceBoxes to deselect to unselect meal ComboBox
         meal1Cat.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Meal.Category>() {
@@ -482,6 +639,7 @@ public class EditSPController implements Initializable {
         protToggle.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             maxProt.disableProperty().set(!newValue);
             minProt.disableProperty().set(!newValue);
+            updateMealListFilters();    
         });
         //Disable these initially
         maxProt.disableProperty().set(true);
@@ -490,6 +648,7 @@ public class EditSPController implements Initializable {
         carbsToggle.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             maxCarbs.disableProperty().set(!newValue);
             minCarbs.disableProperty().set(!newValue);
+            updateMealListFilters();    
         });
         //Disable these initially
         maxCarbs.disableProperty().set(true);
