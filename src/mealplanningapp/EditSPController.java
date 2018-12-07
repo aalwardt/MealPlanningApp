@@ -282,10 +282,9 @@ public class EditSPController implements Initializable {
         mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, minProtein, maxCarbo, minCarbo);
         
         int j = 0;
-        //Populate the boxes
-        for (Meal meal : mealPlan) {
-            if(!mealsCats.get(j).getSelectionModel().equals(Meal.Category.None)) {
-                mealsComboBox.get(j).getSelectionModel().select(meal);
+        for (int i = 0; i < 5; i++) {
+            if(!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
+                mealsComboBox.get(i).getSelectionModel().select(mealPlan.get(j));
                 j++;
             }
         }
@@ -323,14 +322,13 @@ public class EditSPController implements Initializable {
         meal5ComboBox.setItems(meal5FilteredList);
         
         //Set the ComboBoxes to be auto complete
-        /*
+        
         FxUtil.autoCompleteComboBoxPlus(meal1ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal2ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal3ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal4ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
         FxUtil.autoCompleteComboBoxPlus(meal5ComboBox, (typedText, mealToCompare) -> mealToCompare.getName().toLowerCase().contains(typedText.toLowerCase()));
-        */
-
+        
         //Set up the meal choice blocks
         for (int i = 0; i < mealsCats.size(); i++) {
             mealsCats.get(i).setItems(FXCollections.observableArrayList(Meal.Category.None, Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
