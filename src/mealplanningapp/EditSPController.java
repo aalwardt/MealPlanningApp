@@ -7,6 +7,7 @@ package mealplanningapp;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,13 +26,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
@@ -40,6 +45,12 @@ import javafx.stage.WindowEvent;
  * @author alexa
  */
 public class EditSPController implements Initializable {
+    
+    //Date picker and save plan button
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private Button saveMealPlan;
     
     //Minimum and Maximum Fields
     @FXML
@@ -164,7 +175,7 @@ public class EditSPController implements Initializable {
     FilteredList<Meal> meal3FilteredList = new FilteredList<>(observableList, s -> false);
     FilteredList<Meal> meal4FilteredList = new FilteredList<>(observableList, s -> false);
     FilteredList<Meal> meal5FilteredList = new FilteredList<>(observableList, s -> false);
-    
+
     private void setMeal(Meal meal, int index) {
         meals[index] = meal;
         
@@ -379,29 +390,122 @@ public class EditSPController implements Initializable {
         }
         int maxCarbo;
         int minCarbo;
-        if (protToggle.isSelected()) {
+        if (carbsToggle.isSelected()) {
             maxCarbo = Integer.parseInt(maxCarbs.getText());
             minCarbo = Integer.parseInt(minCarbs.getText());
         } else {
             maxCarbo = -1;
             minCarbo = -1;
         }
-        mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, minProtein, maxCarbo, minCarbo);
-        
-        //Select the items in each of the meal combo boxes
-        int j = 0;
-        for (int i = 0; i < 5; i++) {
-            if(!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
-                mealsComboBox.get(i).getSelectionModel().select(mealPlan.get(j));
-                j++;
-            }
-        }
+        mealPlan = MealDatabase.GenerateMealPlan(categories, minCalories, maxCalories, minProtein, maxProtein, minCarbo, maxCarbo);
         
         if (mealPlan.isEmpty()) {
             for (ComboBox<Meal> cbox : mealsComboBox) {
                 cbox.getSelectionModel().clearSelection();
             }
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initStyle(StageStyle.UTILITY);
+            alert.setTitle("Meal Plan Generation Failure!");
+            alert.setHeaderText(null);
+            alert.setContentText("Could not create any meal plans with your options. Check your meal types and calorie, protein, and carb requirements.");
+
+            alert.showAndWait();
+        } else {
+            //Select the items in each of the meal combo boxes
+            int j = 0;
+            for (int i = 0; i < 5; i++) {
+                if(!mealsCats.get(i).getSelectionModel().getSelectedItem().equals(Meal.Category.None)) {
+                    mealsComboBox.get(i).getSelectionModel().select(mealPlan.get(j));
+                    j++;
+                }
+            }
         }
+    }
+        
+    //Loads a meal into the specified meal index
+    private void loadMeal(Meal meal, int index) {
+        if (meal != null) {
+            //Set the category box
+            mealsCats.get(index).getSelectionModel().select(meal.getCategory());
+            //Set the meal combobox
+            mealsComboBox.get(index).getSelectionModel().select(meal);
+        } else {
+            //If null, clear selections
+            mealsCats.get(index).getSelectionModel().select(Meal.Category.None);
+            mealsComboBox.get(index).getSelectionModel().clearSelection();
+        }
+    }
+    
+    //Loads a meal plan into the application
+    private void loadMealPlan(MealPlan mp) {
+        //Set the date
+        datePicker.setValue(mp.getDate());
+        
+        //Set the max and min calories
+        maxCal.textProperty().set(String.valueOf(mp.getMaxCalories()));
+        minCal.textProperty().set(String.valueOf(mp.getMinCalories()));
+        
+        //Set the max and min protein, if applicable
+        if(mp.proteinToggled()) {
+            maxProt.textProperty().set(String.valueOf(mp.getMaxProtein()));
+            minProt.textProperty().set(String.valueOf(mp.getMinProtein()));
+            protToggle.selectedProperty().set(true);
+        } else {
+            protToggle.selectedProperty().set(false);
+        }
+        
+        //Set the max and min carbs, if applicable
+        if(mp.proteinToggled()) {
+            maxCarbs.textProperty().set(String.valueOf(mp.getMaxCarbs()));
+            minCarbs.textProperty().set(String.valueOf(mp.getMinCarbs()));
+            carbsToggle.selectedProperty().set(true);
+        } else {
+            carbsToggle.selectedProperty().set(false);
+        }
+        
+        //Load in the meals
+        for (int i = 0; i < 5; i++) {
+            Meal currentMeal = mp.getMeal(i);
+            loadMeal(currentMeal, i);
+        }
+    }
+    
+    private MealPlan createMealPlan() {
+        LocalDate date = datePicker.getValue();
+        int currMinCalories = Integer.parseInt(minCal.getText());
+        int currMaxCalories = Integer.parseInt(maxCal.getText());
+        
+        int currMinProtein, currMaxProtein;
+        if (protToggle.selectedProperty().get()) {
+            currMinProtein = Integer.parseInt(minProt.getText());
+            currMaxProtein = Integer.parseInt(maxProt.getText());
+        } else {
+            currMinProtein = -1;
+            currMaxProtein = -1;
+        }
+        
+        int currMinCarbs, currMaxCarbs;
+        if (carbsToggle.selectedProperty().get()) {
+            currMinCarbs = Integer.parseInt(minCarbs.getText());
+            currMaxCarbs = Integer.parseInt(maxCarbs.getText());
+        } else {
+            currMinCarbs = -1;
+            currMaxCarbs = -1;
+        }
+        
+        Meal meal1 = meal1ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal2 = meal2ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal3 = meal3ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal4 = meal4ComboBox.getSelectionModel().getSelectedItem();
+        Meal meal5 = meal5ComboBox.getSelectionModel().getSelectedItem();
+        
+        MealPlan mealPlan = new MealPlan(date,
+                                            currMinCalories, currMaxCalories,
+                                            currMinProtein, currMaxProtein,
+                                            currMinCarbs, currMaxCarbs,
+                                            meal1, meal2, meal3, meal4, meal5);
+        
+        return mealPlan;
     }
     
     /**
