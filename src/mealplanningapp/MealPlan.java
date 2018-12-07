@@ -38,6 +38,11 @@ public class MealPlan {
         this.meal5 = meal5;
     }
     
+    //Return a default, empty meal plan for given date
+    public static MealPlan getDefaultPlan(LocalDate date) {
+        return new MealPlan(date, 0, 2000, -1, -1, -1, -1, null, null, null, null, null);
+    }
+    
     //Getters for information
     public LocalDate getDate() { return date; }
     public int getMinCalories() { return minCalories; }
@@ -67,11 +72,9 @@ public class MealPlan {
     //Get whether protein and carb limits were used in plan
     //Min and Max protein/carbs are saved as -1 if not used
     public boolean proteinToggled() {
-        if (minProtein == -1) return false;
-        else return true;
+        return minProtein != -1;
     }
     public boolean carbToggled() {
-        if (minCarbs == -1) return false;
-        else return true;
+        return minCarbs != -1;
     }
 }

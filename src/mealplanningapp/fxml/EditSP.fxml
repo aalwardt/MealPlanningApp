@@ -120,7 +120,7 @@
                   <Font name="System Bold Italic" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="saveMealPlan" mnemonicParsing="false" text="Save Meal Plan" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Button fx:id="saveMealPlan" mnemonicParsing="false" onAction="#saveMealPlan" text="Save Meal Plan" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

@@ -6,6 +6,7 @@
 package mealplanningapp;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -96,6 +97,39 @@ public class MealDatabase {
         } catch (SQLException e) {
             System.err.println("SQL Update Failure: " + e.getMessage());
         }  
+    }
+    
+        public static Meal GetMealByID(int id) {
+        Meal meal;
+        if (id == -1)
+            return null;
+        
+        connectToDb();
+        try {
+            Statement stmt = connector.createStatement();
+            String sql = String.format("Select top 1 * from meals where ID = %d;", id);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            rs.next();
+            //Get data from result set
+            String name = rs.getString("name");
+            String category = rs.getString("category");
+            int calories = rs.getInt("calories");
+            int protein = rs.getInt("protein");
+            int carbs = rs.getInt("carbs");
+
+            meal = new Meal(id, name, Meal.Category.valueOf(category), calories, protein, carbs);
+            System.out.println("Meal read from database");
+
+            //Clean up environment
+            stmt.close();
+            connector.close();  
+        } catch (SQLException e) {
+            System.err.println("SQL Read Failure: " + e.getMessage());
+            return null;
+        } 
+        
+        return meal;
     }
     
     //Gets all meals from the database
@@ -241,5 +275,123 @@ public class MealDatabase {
         } 
         
         return mealPlan;
+    }
+    
+    public static boolean PlanSavedForDate(LocalDate date) {
+        boolean returnVal;
+        String dateString = date.toString();
+        
+        connectToDb();
+        try {
+            Statement stmt = connector.createStatement();
+            String sql = String.format("select COUNT(*) as count from MEALPLANS where PLANDATE = '%s';", dateString);
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            rs.next();
+            //If there is 0 entries, return false. Otherwise, return true.
+            int numEntries = rs.getInt("COUNT");
+            if (numEntries == 0)
+                returnVal = false;
+            else
+                returnVal = true;
+
+            //Clean up environment
+            stmt.close();
+            connector.close();  
+        } catch (SQLException e) {
+            returnVal = false;
+            System.err.println("SQL MealPlan check Failure: " + e.getMessage());
+        } 
+        
+        return returnVal;
+    }
+    
+    public static MealPlan GetMealPlan(LocalDate date) {
+        String dateString = date.toString();
+        //Default values in case of error
+        int minCals = 0;
+        int maxCals = 2000;
+        int minProt = -1;
+        int maxProt = -1;
+        int minCarbs = -1;
+        int maxCarbs = -1;
+        int meal1ID = -1;
+        int meal2ID = -1;
+        int meal3ID = -1;
+        int meal4ID = -1;
+        int meal5ID = -1;
+
+        connectToDb();
+        try {
+            Statement stmt = connector.createStatement();
+            String sql = String.format("select top 1 * from MEALPLANS where PLANDATE = '%s';", dateString);
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            rs.next();
+            //Initialize variables for a MealPlan object
+            minCals = rs.getInt("mincalories");
+            maxCals = rs.getInt("maxcalories");
+            minProt = rs.getInt("minprotein");
+            maxProt = rs.getInt("maxprotein");
+            minCarbs = rs.getInt("mincarbs");
+            maxCarbs = rs.getInt("maxcarbs");
+            meal1ID = rs.getInt("meal1");
+            meal2ID = rs.getInt("meal2");
+            meal3ID = rs.getInt("meal3");
+            meal4ID = rs.getInt("meal4");
+            meal5ID = rs.getInt("meal5");
+            
+            //Clean up environment
+            stmt.close();
+            connector.close();  
+        } catch (SQLException e) {
+            System.err.println("SQL MealPlan retreive Failure: " + e.getMessage());
+        } 
+        
+        //Get the meals from those ID numbers
+        Meal meal1 = GetMealByID(meal1ID);
+        Meal meal2 = GetMealByID(meal2ID);
+        Meal meal3 = GetMealByID(meal3ID);
+        Meal meal4 = GetMealByID(meal4ID);
+        Meal meal5 = GetMealByID(meal5ID);
+        
+        //Construct mealPlan object and return it
+        MealPlan mealPlan = new MealPlan(date, minCals, maxCals, minProt, maxProt, minCarbs, maxCarbs, meal1, meal2, meal3, meal4, meal5);
+        return mealPlan;
+    }
+    
+    public static void InsertMealPlan(MealPlan mealPlan) {
+        connectToDb();
+        //Get the IDs of all the meals
+        int[] mealIDs = new int[5];
+        for (int i = 0; i < 5; i++) {
+            Meal meal = mealPlan.getMeal(i);
+            if (meal != null) {
+                mealIDs[i] = meal.getId();
+            } else {
+                mealIDs[i] = -1;
+            }
+        }
+        try {
+            Statement stmt = connector.createStatement();
+            String sql = String.format("merge into mealplans(plandate, mincalories, maxcalories, minprotein, maxprotein, mincarbs, maxcarbs, meal1, meal2, meal3, meal4, meal5) values('%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d);",
+                    mealPlan.getDate().toString(),
+                    mealPlan.getMinCalories(),
+                    mealPlan.getMaxCalories(),
+                    mealPlan.getMinProtein(),
+                    mealPlan.getMaxProtein(),
+                    mealPlan.getMinCarbs(),
+                    mealPlan.getMaxCarbs(),
+                    mealIDs[0], mealIDs[1], mealIDs[2], mealIDs[3], mealIDs[4]);
+            
+            stmt.executeUpdate(sql);
+            System.out.println("Meal plan merged added to database");
+            
+            //Clean up environment
+            stmt.close();
+            connector.close();
+        } catch (SQLException e) {
+            System.err.println("SQL Merge Failure: " + e.getMessage());
+        }   
     }
 }

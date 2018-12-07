@@ -32,6 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -451,15 +452,19 @@ public class EditSPController implements Initializable {
             minProt.textProperty().set(String.valueOf(mp.getMinProtein()));
             protToggle.selectedProperty().set(true);
         } else {
+            maxProt.textProperty().set("0");
+            minProt.textProperty().set("0");
             protToggle.selectedProperty().set(false);
         }
         
         //Set the max and min carbs, if applicable
-        if(mp.proteinToggled()) {
+        if(mp.carbToggled()) {
             maxCarbs.textProperty().set(String.valueOf(mp.getMaxCarbs()));
             minCarbs.textProperty().set(String.valueOf(mp.getMinCarbs()));
             carbsToggle.selectedProperty().set(true);
         } else {
+            maxCarbs.textProperty().set("0");
+            minCarbs.textProperty().set("0");
             carbsToggle.selectedProperty().set(false);
         }
         
@@ -508,6 +513,12 @@ public class EditSPController implements Initializable {
         return mealPlan;
     }
     
+    @FXML
+    private void saveMealPlan(ActionEvent event) {
+        //Get a meal plan from current data, and save it to the database
+        MealDatabase.InsertMealPlan(createMealPlan());
+    }
+    
     /**
      * Initializes the controller class.
      */
@@ -547,6 +558,44 @@ public class EditSPController implements Initializable {
             mealsCats.get(i).setItems(FXCollections.observableArrayList(Meal.Category.None, Meal.Category.Breakfast, Meal.Category.Lunch, Meal.Category.Dinner, Meal.Category.Snack));
             mealsCats.get(i).getSelectionModel().selectFirst();
         }
+        
+        //Setup date picker
+        datePicker.setValue(LocalDate.now());
+        loadMealPlan(MealPlan.getDefaultPlan(LocalDate.now()));
+        
+        //Make maxCal field numeric only, update meal filters when it is changed
+        maxCal.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                maxCal.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        minCal.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                minCal.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+
+        maxProt.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                maxProt.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        minProt.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                minProt.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        
+        maxCarbs.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                maxCarbs.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
+        minCarbs.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*"))
+                minCarbs.setText(newValue.replaceAll("[^\\d]", ""));
+            updateMealListFilters();    
+        });
         
         //Set actions for Random choice buttons
         meal1Random.setOnAction(new EventHandler<ActionEvent>() {
@@ -695,68 +744,55 @@ public class EditSPController implements Initializable {
             updateMealListFilters();            
         });
         
-        //Make maxCal field numeric only, update meal filters when it is changed
-        maxCal.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*"))
-                maxCal.setText(newValue.replaceAll("[^\\d]", ""));
-            updateMealListFilters();    
-        });
-        minCal.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*"))
-                minCal.setText(newValue.replaceAll("[^\\d]", ""));
-            updateMealListFilters();    
-        });
-        //Set Initial Values
-        maxCal.textProperty().set(String.valueOf(2000));
-        minCal.textProperty().set(String.valueOf(0));
-
-        maxProt.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*"))
-                maxProt.setText(newValue.replaceAll("[^\\d]", ""));
-            updateMealListFilters();    
-        });
-        minProt.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*"))
-                minProt.setText(newValue.replaceAll("[^\\d]", ""));
-            updateMealListFilters();    
-        });
-        //Set Initial Values
-        maxProt.textProperty().set(String.valueOf(0));
-        minProt.textProperty().set(String.valueOf(0));
-        
-        maxCarbs.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*"))
-                maxCarbs.setText(newValue.replaceAll("[^\\d]", ""));
-            updateMealListFilters();    
-        });
-        minCarbs.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!newValue.matches("\\d*"))
-                minCarbs.setText(newValue.replaceAll("[^\\d]", ""));
-            updateMealListFilters();    
-        });
-        //Set Initial Values
-        maxCarbs.textProperty().set(String.valueOf(0));
-        minCarbs.textProperty().set(String.valueOf(0));
-        
-        
         //Listeners for changes in Protein and Carbs checkboxes
         protToggle.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             maxProt.disableProperty().set(!newValue);
             minProt.disableProperty().set(!newValue);
             updateMealListFilters();    
         });
-        //Disable these initially
-        maxProt.disableProperty().set(true);
-        minProt.disableProperty().set(true);
+        maxProt.disableProperty().set(!protToggle.selectedProperty().get());
+        minProt.disableProperty().set(!protToggle.selectedProperty().get());
+
             
         carbsToggle.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             maxCarbs.disableProperty().set(!newValue);
             minCarbs.disableProperty().set(!newValue);
             updateMealListFilters();    
         });
-        //Disable these initially
-        maxCarbs.disableProperty().set(true);
-        minCarbs.disableProperty().set(true);
+        maxCarbs.disableProperty().set(!carbsToggle.selectedProperty().get());
+        minCarbs.disableProperty().set(!carbsToggle.selectedProperty().get());
+        
+        //Listener for when the date is changed
+        datePicker.valueProperty().addListener((ov, oldDate, newDate) -> {
+            //If it's actually changed
+            if (oldDate != newDate) {
+                if (MealDatabase.PlanSavedForDate(newDate)) {
+                    loadMealPlan(MealDatabase.GetMealPlan(newDate));
+                } else {
+                    loadMealPlan(MealPlan.getDefaultPlan(newDate));
+                }
+            }
+        });
+        
+        //Set dayCellFactory so that days with saved plans are highlighted
+        datePicker.setDayCellFactory(dp -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                
+                //If there's a plan saved, set the style
+                if(MealDatabase.PlanSavedForDate(item)) {
+                    setStyle("-fx-background-color: #50c050");
+                }
+            }
+        });
+        
+        //Load MealPlan if exists for this date
+        if(MealDatabase.PlanSavedForDate(LocalDate.now())) {
+            loadMealPlan(MealDatabase.GetMealPlan(LocalDate.now()));
+        }
+        
     }   
     
     @FXML
