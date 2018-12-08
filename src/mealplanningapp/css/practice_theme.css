@@ -1,16 +1,19 @@
 .root{
     
     /*-fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%);
-    -fx-background-image: url("fittedlogo.png");
-    -fx-background-size:     cover;                      
-    -fx-background-repeat:   no-repeat;
-    -fx-background-position: center center;   */
-    -fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%)
+    -fx-background-color:linear-gradient(to bottom, #0099ff 0%, #66ffff 100%);
     
-   
-   
+    -fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%);*/
+    
+   -fx-background-image: url("foodplate.jpg");
+   -fx-background-size:     cover;                      
+   -fx-background-repeat:   no-repeat;
+   -fx-background-position: center center;   
 }
-
+.filterlabel{
+    -fx-background-color:black;
+    -fx-opacity: .8;
+}
 
 
 .button {
@@ -19,7 +22,9 @@
     -fx-font-size: 12px;
     -fx-font-family:"Arial Black";
     -fx-text-weight:bold;
-    -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+    -fx-background-color:
+        linear-gradient(#0066cc, #0099ff),
+        radial-gradient(center 50% -40%, radius 200%,#0099ff 45%, #0066cc 50%);
     -fx-padding: 2 12 2 12;
     -fx-fill: #818181;
     
@@ -37,7 +42,7 @@
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
    -fx-fill: #818181;
-   /*-fx-text-fill:white;*/
+   -fx-text-fill:white;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 .header{
@@ -45,16 +50,22 @@
     -fx-text-fill: white;
     -fx-font-size: 80px;
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+    -fx-background-color: transparent;
     
 }    
 .headertwo{
-   
-    
+   /*
+    -fx-background-image: url("foodplate.jpg");
+    -fx-background-size:     cover;                      
+    -fx-background-repeat:   no-repeat;
+    -fx-background-position: center center;  */
 }
 .combo-box{
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
-   -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+   -fx-background-color:
+        linear-gradient(#0066cc, #0099ff),
+        radial-gradient(center 50% -40%, radius 200%,#0099ff 45%, #0066cc 50%);
    -fx-padding: 2 12 2 12;
     
 }
@@ -62,13 +73,16 @@
    -fx-background-color: linear-gradient(#e0e0d1,#f5f5f0);
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
-   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
-
+.combo-box:focused > .list-cell{
+    -fx-text-fill: black;
+}
+.combo-box-popup .list-view .list-cell:hover{
+    -fx-background-color: #0066cc;
+}
 .combo-box .list-cell 
 {
     -fx-fill: #818181;
-    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
     -fx-text-weight:bold;
     -fx-text-fill: white;
     -fx-padding: 3 0 2 7;
@@ -76,7 +90,9 @@
 }
 .combo-box .list-view .list-cell{
     -fx-background-color: transparent;
-    -fx-fill: #818181;
+    -fx-fill: black;
+    -fx-text-fill: black;
+    
 }
 
 
@@ -84,9 +100,9 @@
 
 .choice-box{
     /*BLACK*/
-    -fx-text-fill:white;
-    -fx-font-size: 12px;
-    -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+    -fx-background-color:
+        linear-gradient(#0066cc, #0099ff),
+        radial-gradient(center 50% -40%, radius 200%,#0099ff 45%, #0066cc 50%);
     -fx-padding: 2 12 2 12;
       
     /*RED
@@ -121,18 +137,24 @@
     */
 }
 .choice-box .label{
-   
     -fx-text-fill: white;
-     /*
-   -fx-text-fill: white;
-   -fx-text-weight:bold;
-   -fx-font-family: "Arial Black";
-   -fx-fill: #818181;
-   */
-    
+    -fx-effect:none ;
 }
-.date-picker{
+.choice-box .menu-item > .label { -fx-text-fill: black; }
+/* Background color of the whole context menu
+.choice-box .context-menu { -fx-background-color: black; }
+ Focused item background color in the list
+.choice-box .menu-item:focused { -fx-background-color: orange; }
+ Text color of non-focused items in the list
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+ Text color of focused item in the list
+.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
+.list-view .list-cell:even {
+-fx-background-color:#d9d9d9 ;
+-fx-text-fill: white;
 }
-.text-field{
-    
+.list-view .list-cell:odd {
+-fx-background-color: #808080;
+-fx-text-fill: white;
 }
+*/
