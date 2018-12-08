@@ -1,24 +1,27 @@
 .root{
     
-    /*-fx-background-color: 
-    -fx-background-image: url("foodplate.jpg");
+    /*-fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%);
+    -fx-background-image: url("fittedlogo.png");
     -fx-background-size:     cover;                      
     -fx-background-repeat:   no-repeat;
-    -fx-background-position: center center;   
+    -fx-background-position: center center;   */
+    -fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%)
     
-    */
-   -fx-background-color: linear-gradient(to bottom, #000000 0%, #bfbfbf 115%);
+   
+   
 }
 
 
 
 .button {
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
     -fx-text-fill:white;
     -fx-font-size: 12px;
     -fx-font-family:"Arial Black";
     -fx-text-weight:bold;
     -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
     -fx-padding: 2 12 2 12;
+    -fx-fill: #818181;
     
 }
 
@@ -28,13 +31,13 @@
    -fx-text-fill:black;
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
-   -fx-fill: #white;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 .label{
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
    -fx-fill: #818181;
+   /*-fx-text-fill:white;*/
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 .header{
@@ -45,13 +48,39 @@
     
 }    
 .headertwo{
-    -fx-background-image: url("picgrayscale.png");
-    -fx-background-size:     cover;                      
-    -fx-background-repeat:   no-repeat;
-    -fx-background-position: center center;   
-    -fx-background-color: rgba(255, 255, 255, 0.3);
+   
     
 }
+.combo-box{
+   -fx-text-weight:bold;
+   -fx-font-family: "Arial Black";
+   -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
+   -fx-padding: 2 12 2 12;
+    
+}
+.combo-box-base:focused {
+   -fx-background-color: linear-gradient(#e0e0d1,#f5f5f0);
+   -fx-text-weight:bold;
+   -fx-font-family: "Arial Black";
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.combo-box .list-cell 
+{
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+    -fx-text-weight:bold;
+    -fx-text-fill: white;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em; 
+}
+.combo-box .list-view .list-cell{
+    -fx-background-color: transparent;
+    -fx-fill: #818181;
+}
+
+
+
 
 .choice-box{
     /*BLACK*/
@@ -92,9 +121,9 @@
     */
 }
 .choice-box .label{
-    
+   
     -fx-text-fill: white;
-    /*
+     /*
    -fx-text-fill: white;
    -fx-text-weight:bold;
    -fx-font-family: "Arial Black";
@@ -105,14 +134,5 @@
 .date-picker{
 }
 .text-field{
-    
-}
-.listview{
-    -fx-text-fill:white;
-    -fx-font-size: 12px;
-    -fx-font-family: "Arial Black";
-    -fx-text-weight:bold;
-    -fx-background-color: linear-gradient(#999999 0%, #000000 50%, #999999 100%);
-    -fx-padding: 2 12 2 12;
     
 }
