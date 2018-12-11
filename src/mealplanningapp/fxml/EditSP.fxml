@@ -115,7 +115,7 @@
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="61.0" text="Calories" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <Label text="Protein" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="58.0" text="Carbs" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Button fx:id="saveMealPlan" minHeight="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="121.0" text="Save Meal Plan" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Button fx:id="saveMealPlan" minHeight="30.0" mnemonicParsing="false" onAction="#saveMealPlan" prefHeight="30.0" prefWidth="121.0" text="Save Meal Plan" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="961.0" styleClass="header" text="FLANNR" GridPane.columnSpan="2147483647">
                <font>
                   <Font name="System Bold Italic" size="32.0" />
